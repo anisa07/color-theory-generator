@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Color Theory Generator - 60-30-10 Rule</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Color Theory Generator</h1>
+        <p class="subtitle">Choose a starting color and color scheme to generate harmonious palettes using the 60-30-10 rule</p>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="scheme">Color Scheme:</label>
+                <select id="scheme">
+                    <option value="complementary">Complementary</option>
+                    <option value="analogous">Analogous</option>
+                    <option value="triadic">Triadic</option>
+                    <option value="split-complementary">Split-Complementary</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="baseColor">Start (optional):</label>
+                <input type="color" id="baseColor" value="#667eea" title="Choose a color to use as the foundation for generating the entire palette">
+            </div>
+            
+            <div class="control-group">
+                <label>&nbsp;</label>
+                <button onclick="generateColors()" class="btn primary">Generate Palette</button>
+            </div>
+            
+            <div class="control-group">
+                <label>&nbsp;</label>
+                <button onclick="generateRandomColors()" class="btn primary outline">Random Colors</button>
+            </div>
+            
+            <div class="control-group">
+                <label>&nbsp;</label>
+                <button onclick="showAllVariations()" class="btn primary outline">All Variations</button>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3 class="info-title">How it works:</h3>
+            <div class="info-content">
+                <p class="info-paragraph">
+                    <strong>Starting Color:</strong> The color you choose (or we generate randomly) that serves as the foundation.<br>
+                    <strong>Generated Palette:</strong> Eight colors following the 60-30-10 rule. A design principle where 60% is the dominant color, 30% is secondary, and 10% is accent.
+                </p>
+                
+                <h4 class="scheme-list-title">Color Schemes:</h4>
+                <ul class="scheme-list">
+                    <li class="scheme-list-item">
+                        <strong>Complementary:</strong> Colors opposite on the wheel - creates vibrant, high-contrast palettes
+                    </li>
+                    <li class="scheme-list-item">
+                        <strong>Analogous:</strong> Adjacent colors - creates harmonious, peaceful, and calming palettes
+                    </li>
+                    <li class="scheme-list-item">
+                        <strong>Triadic:</strong> Three colors evenly spaced - creates vibrant yet balanced palettes
+                    </li>
+                    <li class="scheme-list-item">
+                        <strong>Split-Complementary:</strong> Base color plus two adjacent to its complement - creates high contrast with less tension
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="results">
+            <div class="loading">Click "Generate Palette" to create your first color scheme!</div>
+        </div>
+
+        <!-- Website Preview Section -->
+        <div id="preview-section" class="preview-section" style="display: none;">
+            <h2 class="preview-title">🌐 Website Preview</h2>
+            <p class="preview-subtitle">See how your color palette looks in real website components:</p>
+            
+            <div id="website-preview" class="website-preview">
+                <!-- Dynamic preview content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
