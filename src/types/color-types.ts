@@ -19,4 +19,12 @@ export interface ColorPalette {
   primaryForeground: string; // foreground color that contrasts with primary
   secondaryForeground: string; // foreground color that contrasts with secondary
   accentForeground: string; // foreground color that contrasts with accent
+  theme?: 'light' | 'dark'; // theme variant
+}
+
+export interface DualThemePalette {
+  light: ColorPalette;
+  dark: ColorPalette;
+  scheme: string;
+  baseColor: string;
 }

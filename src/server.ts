@@ -6,8 +6,10 @@ import {
   generateRandomBaseColor,
   generate60_30_10Palette,
   generatePaletteVariations,
+  generateDualThemePalette,
+  generateDualThemeVariations,
   getSchemeDescription,
-} from './color-theory';
+} from './services/color-theory';
 import { HEX_6_COLOR } from './params/config';
 import { HSLColor } from './types/color-types';
 import { colorConverter } from './services/ColorConverter';
@@ -29,10 +31,12 @@ app.get('/colors', (req, res) => {
       scheme = 'complementary',
       baseColor,
       variations,
+      dualTheme,
     } = req.query as {
       scheme?: 'complementary' | 'analogous' | 'triadic' | 'split-complementary';
       baseColor?: string;
       variations?: string;
+      dualTheme?: string;
     };
 
     // Generate or parse base color
@@ -47,7 +51,36 @@ app.get('/colors', (req, res) => {
     // }
 
     // Generate palette(s)
-    if (variations === 'true') {
+    if (dualTheme === 'true' && variations === 'true') {
+      // Generate dual theme variations for all schemes
+      const allDualVariations = generateDualThemeVariations(baseHsl);
+      res.json({
+        baseColor: `hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`,
+        dualThemePalettes: allDualVariations,
+        colorTheory: {
+          rule: '60-30-10',
+          description:
+            'Primary (60%) - dominant, Secondary (30%) - supporting, Accent (10%) - highlights',
+          themes: ['light', 'dark'],
+          schemes: Object.keys(allDualVariations),
+        },
+      });
+    } else if (dualTheme === 'true') {
+      // Generate dual theme for single scheme
+      const dualPalette = generateDualThemePalette(baseHsl, scheme);
+      res.json({
+        baseColor: `hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`,
+        scheme,
+        dualThemePalette: dualPalette,
+        colorTheory: {
+          rule: '60-30-10',
+          description:
+            'Primary (60%) - dominant, Secondary (30%) - supporting, Accent (10%) - highlights',
+          themes: ['light', 'dark'],
+          schemeDescription: getSchemeDescription(scheme),
+        },
+      });
+    } else if (variations === 'true') {
       const allVariations = generatePaletteVariations(baseHsl);
       res.json({
         baseColor: `#${baseHsl.h.toString(16).padStart(2, '0')}${baseHsl.s.toString(16).padStart(2, '0')}${baseHsl.l.toString(16).padStart(2, '0')}`,
@@ -83,19 +116,35 @@ app.get('/colors', (req, res) => {
 });
 
 // Generate random color endpoint
-app.get('/colors/random', (_req, res) => {
+app.get('/colors/random', (req, res) => {
   try {
+    const { dualTheme } = req.query as { dualTheme?: string };
     const baseHsl = generateRandomBaseColor();
-    const allSchemes = generatePaletteVariations(baseHsl);
-    res.json({
-      baseColor: `hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`,
-      palettes: allSchemes,
-      colorTheory: {
-        rule: '60-30-10 Color Rule',
-        description:
-          'A design principle where 60% is the dominant color, 30% is secondary, and 10% is accent',
-      },
-    });
+
+    if (dualTheme === 'true') {
+      const allDualSchemes = generateDualThemeVariations(baseHsl);
+      res.json({
+        baseColor: `hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`,
+        dualThemePalettes: allDualSchemes,
+        colorTheory: {
+          rule: '60-30-10 Color Rule',
+          description:
+            'A design principle where 60% is the dominant color, 30% is secondary, and 10% is accent',
+          themes: ['light', 'dark'],
+        },
+      });
+    } else {
+      const allSchemes = generatePaletteVariations(baseHsl);
+      res.json({
+        baseColor: `hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`,
+        palettes: allSchemes,
+        colorTheory: {
+          rule: '60-30-10 Color Rule',
+          description:
+            'A design principle where 60% is the dominant color, 30% is secondary, and 10% is accent',
+        },
+      });
+    }
   } catch (error) {
     console.error('Random color generation error:', error);
     res.status(500).json({ error: 'Failed to generate random colors' });

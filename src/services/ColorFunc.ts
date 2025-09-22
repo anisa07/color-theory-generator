@@ -104,6 +104,49 @@ class ColorFunc {
       return { h: hue, s: saturation, l: 95 };
     }
   }
+
+  // Generate light theme background (light backgrounds)
+  getLightBackgroundColor(baseHsl: HSLColor): HSLColor {
+    const isNeutral = baseHsl.s < 10 || (baseHsl.s < 25 && (baseHsl.l < 10 || baseHsl.l > 95));
+    const saturation = isNeutral ? 0 : Math.max(5, baseHsl.s - 50);
+    const hue = isNeutral ? 0 : baseHsl.h;
+    return { h: hue, s: saturation, l: 95 };
+  }
+
+  // Generate dark theme background (dark backgrounds)
+  getDarkBackgroundColor(baseHsl: HSLColor): HSLColor {
+    const isNeutral = baseHsl.s < 10 || (baseHsl.s < 25 && (baseHsl.l < 10 || baseHsl.l > 95));
+    const saturation = isNeutral ? 0 : Math.max(10, baseHsl.s - 40);
+    const hue = isNeutral ? 0 : baseHsl.h;
+    const lightness = isNeutral ? 15 : 20;
+    return { h: hue, s: saturation, l: lightness };
+  }
+
+  // Generate dark theme variant by inverting lightness relationships
+  convertToDarkTheme(hsl: HSLColor): HSLColor {
+    // Invert lightness while preserving hue and adjusting saturation
+    const newLightness = 100 - hsl.l;
+    // Slightly reduce saturation for dark themes to avoid overwhelming colors
+    const newSaturation = Math.max(30, hsl.s - 10);
+
+    return {
+      h: hsl.h,
+      s: newSaturation,
+      l: Math.max(20, Math.min(80, newLightness)),
+    };
+  }
+
+  // Generate light theme variant
+  convertToLightTheme(hsl: HSLColor): HSLColor {
+    // Keep original lightness but ensure it's in light range
+    const newLightness = hsl.l < 50 ? 100 - hsl.l : hsl.l;
+
+    return {
+      h: hsl.h,
+      s: hsl.s,
+      l: Math.max(40, Math.min(85, newLightness)),
+    };
+  }
 }
 
 const colorFunc = new ColorFunc();
