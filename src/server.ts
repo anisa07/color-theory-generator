@@ -44,11 +44,6 @@ app.get('/colors', (req, res) => {
       baseColor && HEX_6_COLOR.test(baseColor)
         ? colorConverter.hexToHsl(baseColor)
         : generateRandomBaseColor();
-    // if (baseColor && HEX_6_COLOR.test(baseColor)) {
-    //   baseHsl = colorConverter.hexToHsl(baseColor);
-    // } else {
-    //   baseHsl = generateRandomBaseColor();
-    // }
 
     // Generate palette(s)
     if (dualTheme === 'true' && variations === 'true') {
