@@ -1,6 +1,5 @@
 import { colorFunc } from '../services/ColorFunc';
 import { colorConverter } from '../services/ColorConverter';
-import { HSLColor } from '../types/color-types';
 
 // Test function to validate contrast ratios
 export function validateContrastRatio(
