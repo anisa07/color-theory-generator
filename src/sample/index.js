@@ -212,6 +212,15 @@ function renderPaletteColors(palette) {
   //   <div class="color-usage">${colorUsage[colorName] || ''}</div>
 
   return Object.entries(palette)
+    .filter(([colorName, colorValue]) => {
+      // Only show actual color values (hex colors), skip theme indicators
+      return (
+        typeof colorValue === 'string' &&
+        colorValue.startsWith('#') &&
+        colorValue !== 'dark' &&
+        colorValue !== 'light'
+      );
+    })
     .map(
       ([colorName, colorValue]) => `
                 <div class="color-row">

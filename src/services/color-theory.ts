@@ -64,22 +64,22 @@ export function generate60_30_10Palette(
   const foregroundHsl = colorFunc.getHighContrastColor(backgroundHsl);
   const foreground = colorConverter.hslToHex(foregroundHsl.h, foregroundHsl.s, foregroundHsl.l);
 
-  // Generate specific foreground colors for each colored background
-  const primaryForegroundHsl = colorFunc.getHighContrastColor(colors[0]);
+  // Generate specific foreground colors for each colored background with higher contrast requirement (7:1 for AA+)
+  const primaryForegroundHsl = colorFunc.getHighContrastColor(colors[0], 7.0);
   const primaryForeground = colorConverter.hslToHex(
     primaryForegroundHsl.h,
     primaryForegroundHsl.s,
     primaryForegroundHsl.l,
   );
 
-  const secondaryForegroundHsl = colorFunc.getHighContrastColor(secondaryHsl);
+  const secondaryForegroundHsl = colorFunc.getHighContrastColor(secondaryHsl, 7.0);
   const secondaryForeground = colorConverter.hslToHex(
     secondaryForegroundHsl.h,
     secondaryForegroundHsl.s,
     secondaryForegroundHsl.l,
   );
 
-  const accentForegroundHsl = colorFunc.getHighContrastColor(accentHsl);
+  const accentForegroundHsl = colorFunc.getHighContrastColor(accentHsl, 7.0);
   const accentForeground = colorConverter.hslToHex(
     accentForegroundHsl.h,
     accentForegroundHsl.s,
@@ -182,43 +182,43 @@ export function generateDualThemePalette(
     darkForegroundHsl.l,
   );
 
-  // Generate foreground colors for colored backgrounds
-  const lightPrimaryForegroundHsl = colorFunc.getHighContrastColor(colors[0]);
+  // Generate foreground colors for colored backgrounds with higher contrast requirement (7:1 for AA+)
+  const lightPrimaryForegroundHsl = colorFunc.getHighContrastColor(colors[0], 7.0);
   const lightPrimaryForeground = colorConverter.hslToHex(
     lightPrimaryForegroundHsl.h,
     lightPrimaryForegroundHsl.s,
     lightPrimaryForegroundHsl.l,
   );
 
-  const lightSecondaryForegroundHsl = colorFunc.getHighContrastColor(lightSecondaryHsl);
+  const lightSecondaryForegroundHsl = colorFunc.getHighContrastColor(lightSecondaryHsl, 7.0);
   const lightSecondaryForeground = colorConverter.hslToHex(
     lightSecondaryForegroundHsl.h,
     lightSecondaryForegroundHsl.s,
     lightSecondaryForegroundHsl.l,
   );
 
-  const lightAccentForegroundHsl = colorFunc.getHighContrastColor(lightAccentHsl);
+  const lightAccentForegroundHsl = colorFunc.getHighContrastColor(lightAccentHsl, 7.0);
   const lightAccentForeground = colorConverter.hslToHex(
     lightAccentForegroundHsl.h,
     lightAccentForegroundHsl.s,
     lightAccentForegroundHsl.l,
   );
 
-  const darkPrimaryForegroundHsl = colorFunc.getHighContrastColor(darkPrimaryHsl);
+  const darkPrimaryForegroundHsl = colorFunc.getHighContrastColor(darkPrimaryHsl, 7.0);
   const darkPrimaryForeground = colorConverter.hslToHex(
     darkPrimaryForegroundHsl.h,
     darkPrimaryForegroundHsl.s,
     darkPrimaryForegroundHsl.l,
   );
 
-  const darkSecondaryForegroundHsl = colorFunc.getHighContrastColor(darkSecondaryHsl);
+  const darkSecondaryForegroundHsl = colorFunc.getHighContrastColor(darkSecondaryHsl, 7.0);
   const darkSecondaryForeground = colorConverter.hslToHex(
     darkSecondaryForegroundHsl.h,
     darkSecondaryForegroundHsl.s,
     darkSecondaryForegroundHsl.l,
   );
 
-  const darkAccentForegroundHsl = colorFunc.getHighContrastColor(darkAccentHsl);
+  const darkAccentForegroundHsl = colorFunc.getHighContrastColor(darkAccentHsl, 7.0);
   const darkAccentForeground = colorConverter.hslToHex(
     darkAccentForegroundHsl.h,
     darkAccentForegroundHsl.s,
@@ -263,7 +263,6 @@ export function generatePaletteVariations(baseColor: HSLColor): { [key: string]:
     complementary: generate60_30_10Palette(baseColor, 'complementary'),
     analogous: generate60_30_10Palette(baseColor, 'analogous'),
     triadic: generate60_30_10Palette(baseColor, 'triadic'),
-    // tetradic: generate60_30_10Palette(baseColor, 'tetradic'),
     splitComplementary: generate60_30_10Palette(baseColor, 'split-complementary'),
   };
 }

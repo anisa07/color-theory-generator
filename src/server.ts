@@ -13,6 +13,7 @@ import {
 import { HEX_6_COLOR } from './params/config';
 import { HSLColor } from './types/color-types';
 import { colorConverter } from './services/ColorConverter';
+import { validatePaletteContrasts } from './utils/contrastValidator';
 
 dotenv.config();
 
@@ -185,6 +186,55 @@ app.get('/colors/harmony/:scheme', (req, res) => {
   } catch (error) {
     console.error('Harmony generation error:', error);
     res.status(500).json({ error: 'Failed to generate color harmony' });
+  }
+});
+
+// Test contrast validation endpoint
+app.get('/colors/test-contrast', (req, res) => {
+  try {
+    const {
+      scheme = 'complementary',
+      baseColor,
+      dualTheme,
+    } = req.query as {
+      scheme?: 'complementary' | 'analogous' | 'triadic' | 'split-complementary';
+      baseColor?: string;
+      dualTheme?: string;
+    };
+
+    const baseHsl: HSLColor =
+      baseColor && HEX_6_COLOR.test(baseColor)
+        ? colorConverter.hexToHsl(baseColor)
+        : generateRandomBaseColor();
+
+    if (dualTheme === 'true') {
+      const dualPalette = generateDualThemePalette(baseHsl, scheme);
+      const lightContrasts = validatePaletteContrasts(dualPalette.light);
+      const darkContrasts = validatePaletteContrasts(dualPalette.dark);
+
+      res.json({
+        baseColor: `hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`,
+        scheme,
+        palettes: dualPalette,
+        contrastValidation: {
+          light: lightContrasts,
+          dark: darkContrasts,
+        },
+      });
+    } else {
+      const palette = generate60_30_10Palette(baseHsl, scheme);
+      const contrasts = validatePaletteContrasts(palette);
+
+      res.json({
+        baseColor: `hsl(${baseHsl.h}, ${baseHsl.s}%, ${baseHsl.l}%)`,
+        scheme,
+        palette,
+        contrastValidation: contrasts,
+      });
+    }
+  } catch (error) {
+    console.error('Contrast test error:', error);
+    res.status(500).json({ error: 'Failed to test contrast' });
   }
 });
 
