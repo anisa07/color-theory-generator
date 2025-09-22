@@ -220,11 +220,9 @@ npm run format   # Format code with Prettier
 - **WCAG Guidelines**: Colors meet contrast ratio requirements
 - **Individual Foreground Colors**: Each background gets its optimal text color
 - **Theme Adaptability**: Works in both light and dark environments
-- **Responsive Design**: Accessible on all device sizes
 
 ### **Interactive Features**
 
 - **Click to Copy**: Copy any color value to clipboard
 - **Base Color Update**: Copied colors automatically update the color picker
-- **Smooth Transitions**: CSS animations for better user experience
 - **Theme Comparison**: Toggle between light/dark themes instantly
