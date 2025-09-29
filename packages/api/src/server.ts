@@ -1,4 +1,4 @@
-// src/server.ts
+// API server for color theory generator
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -11,7 +11,7 @@ import {
   getSchemeDescription,
 } from './services/color-theory';
 import { HEX_6_COLOR } from './params/config';
-import { HSLColor } from './types/color-types';
+import type { HSLColor } from './types/color-types';
 import { colorConverter } from './services/ColorConverter';
 import { validatePaletteContrasts } from './utils/contrastValidator';
 
@@ -19,11 +19,20 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-// Serve static files from the sample directory
-app.use(express.static(path.join(__dirname, 'sample')));
+
+// Enable CORS for development
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 app.get('/', (req: express.Request, res: express.Response) => {
-  res.sendFile(path.join(__dirname, 'sample/index.html'));
+  res.json({
+    message: 'Color Theory Generator API',
+    version: '1.0.0',
+    endpoints: ['/colors', '/colors/random', '/colors/test-contrast', '/colors/harmony/:scheme'],
+  });
 });
 
 app.get('/colors', (req, res) => {

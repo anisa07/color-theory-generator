@@ -1,0 +1,37 @@
+{
+  "name": "@color-theory/api",
+  "version": "1.0.0",
+  "description": "Color theory generator API server",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "clean": "rm -rf dist",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write src/**/*.ts",
+    "test": "echo \"Tests not implemented yet\""
+  },
+  "keywords": [
+    "color-theory",
+    "api",
+    "express"
+  ],
+  "author": "anisa07",
+  "license": "ISC",
+  "dependencies": {
+    "@color-theory/shared": "file:../shared",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "eslint": "^9.36.0",
+    "prettier": "^3.6.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  }
+}

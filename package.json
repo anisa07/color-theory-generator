@@ -1,15 +1,24 @@
 {
-  "name": "color-generator",
+  "name": "color-theory-generator",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "lint": "eslint . --ext .ts",
-    "format": "prettier -w ."
+    "dev": "npm run dev --workspace=packages/api & npm run dev --workspace=packages/web",
+    "dev:api": "npm run dev --workspace=packages/api",
+    "dev:web": "npm run dev --workspace=packages/web",
+    "build": "npm run build --workspaces",
+    "build:api": "npm run build --workspace=packages/api",
+    "build:web": "npm run build --workspace=packages/web",
+    "start": "npm run start --workspace=packages/api",
+    "lint": "npm run lint --workspaces",
+    "format": "npm run format --workspaces",
+    "clean": "npm run clean --workspaces",
+    "test": "npm run test --workspaces"
   },
-  "author": "",
+  "author": "anisa07",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^5.0.3",
@@ -28,7 +37,16 @@
     "dotenv": "^17.2.2",
     "express": "^5.1.0"
   },
-  "type": "commonjs",
-  "keywords": [],
-  "description": ""
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "color-theory",
+    "color-generator",
+    "design-tools",
+    "monorepo",
+    "typescript"
+  ],
+  "description": "A comprehensive color theory generator with 60-30-10 rule implementation, dual themes, and WCAG-compliant contrast calculations"
 }
