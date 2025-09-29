@@ -182,8 +182,6 @@ GET /colors?scheme=complementary&baseColor=%23667eea
 
 ## 🛠️ Development Commands "scheme": "complementary",
 
-"palette": {
-
 ### Root Level Commands "primary": "#667eea",
 
 ````bash "secondary": "#f093fb",
@@ -220,51 +218,43 @@ npm run dev:web # Start web dev server### Dual Theme Response
 
 npm run build:web # Build web assets
 
-````json
+## 🎨 Color Theory Features "baseColor": "hsl(243, 80%, 62%)",
 
-{
+"scheme": "complementary",
 
-## 🎨 Color Theory Features  "baseColor": "hsl(243, 80%, 62%)",
+### Supported Color Schemes "dualThemePalette":
 
-  "scheme": "complementary",
+- **Complementary** - Colors opposite on the color wheel "light":
 
-### Supported Color Schemes  "dualThemePalette": {
+- **Analogous** - Adjacent colors on the color wheel "primary": "#667eea",
 
-- **Complementary** - Colors opposite on the color wheel    "light": {
+- **Triadic** - Three evenly spaced colors "secondary": "#f093fb",
 
-- **Analogous** - Adjacent colors on the color wheel        "primary": "#667eea",
-
-- **Triadic** - Three evenly spaced colors      "secondary": "#f093fb",
-
-- **Split-Complementary** - Base + two adjacent to complement      "accent": "#4facfe",
+- **Split-Complementary** - Base + two adjacent to complement "accent": "#4facfe",
 
       "background": "#ffffff",
 
-### 60-30-10 Color Rule      "foreground": "#333333",
+### 60-30-10 Color Rule "foreground": "#333333",
 
-- **Primary (60%)** - Dominant color for main elements      "theme": "light"
+- **Primary (60%)** - Dominant color for main elements "theme": "light"
 
-- **Secondary (30%)** - Supporting color for accents    },
+- **Secondary (30%)** - Supporting color for accents,
 
-- **Accent (10%)** - Highlight color for call-to-actions    "dark": {
+- **Accent (10%)** - Highlight color for call-to-actions "dark": {
 
-      "primary": "#8b9cff",
+      "primary": "#8b9cff" },
 
-### Accessibility Features      "secondary": "#c167d1",
+### Accessibility Features "secondary": "#c167d1",
 
-- **WCAG AA/AAA compliance** - Automatic contrast validation      "accent": "#6bb6ff",
+- **WCAG AA/AAA compliance** - Automatic contrast validation "accent": "#6bb6ff",
 
-- **Softer foreground colors** - Reduces eye strain while maintaining readability      "background": "#1a1a1a",
+- **Softer foreground colors** - Reduces eye strain while maintaining readability "background": "#1a1a1a",
 
-- **Dual theme support** - Automatic light/dark theme generation      "foreground": "#ffffff",
+- **Dual theme support** - Automatic light/dark theme generation "foreground": "#ffffff",
 
-- **Contrast testing** - Built-in contrast ratio validation      "theme": "dark"
+- **Contrast testing** - Built-in contrast ratio validation "theme": "dark"
 
-    }
-
-## 📄 License  }
-
-}
+## 📄 License
 
 This project is licensed under the ISC License.```
 
@@ -354,4 +344,7 @@ npm run format   # Format code with Prettier
 - **Click to Copy**: Copy any color value to clipboard
 - **Base Color Update**: Copied colors automatically update the color picker
 - **Theme Comparison**: Toggle between light/dark themes instantly
-````
+
+```
+
+```
