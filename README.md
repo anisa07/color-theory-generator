@@ -290,7 +290,7 @@ Usage example can be found here
 - **Click color swatches** to copy values and experiment with variations
 - **Use the website preview** to see real-world application of your palette
 
-![https://github.com/anisa07/color-theory-generator/src/sample/example.png](https://github.com/anisa07/color-theory-generator/blob/main/src/sample/example.png)
+![https://github.com/anisa07/color-theory-generator/sample/example.png](https://github.com/anisa07/color-theory-generator/blob/main/sample/example.png)
 
 ## 🎨 Color Theory Concepts
 
